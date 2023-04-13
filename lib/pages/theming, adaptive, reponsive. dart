@@ -1,0 +1,53 @@
+//import 'package:flutter/material.dart';
+
+
+// Membuat variabel global untuk warna dan ukuran
+
+Pertama-tama, buat variabel global untuk warna dan ukuran yang akan digunakan di seluruh aplikasi. Misalnya:
+
+const kPrimaryColor = Color(0xFF6C63FF);
+const kSecondaryColor = Color(0xFF34B4B4);
+const kBackgroundColor = Color(0xFFF5F5F5);
+
+const double kDefaultPadding = 20.0;
+
+//Menentukan tema aplikasi
+Kedua, tentukan tema aplikasi Anda menggunakan MaterialApp dan ThemeData. Anda dapat menentukan warna primer, warna sekunder, jenis font, dan lainnya. Misalnya:
+MaterialApp(
+  title: 'Penjualan Baju',
+  theme: ThemeData(
+    primaryColor: kPrimaryColor,
+    accentColor: kSecondaryColor,
+    backgroundColor: kBackgroundColor,
+    scaffoldBackgroundColor: kBackgroundColor,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    textTheme: TextTheme(
+      headline1: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+      headline2: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+      bodyText1: TextStyle(fontSize: 16.0),
+      bodyText2: TextStyle(fontSize: 14.0),
+    ),
+  ),
+  home: HomePage(),
+);
+
+//Membuat tampilan Adaptive
+Untuk membuat tampilan yang adaptif, gunakan widget LayoutBuilder untuk memeriksa lebar layar dan memilih widget yang sesuai untuk ukuran layar. Misalnya:
+LayoutBuilder(builder: (context, constraints) {
+  if (constraints.maxWidth < 600) {
+    return MobileLayout();
+  } else {
+    return DesktopLayout();
+  }
+}),
+
+
+//Membuat tampilan Responsive
+Untuk membuat tampilan yang responsif, gunakan widget MediaQuery untuk mendapatkan informasi ukuran layar dan memilih widget yang sesuai untuk setiap ukuran. Misalnya:
+if (MediaQuery.of(context).size.width >= 600) {
+  return DesktopLayout();
+} else if (MediaQuery.of(context).size.width >= 400) {
+  return TabletLayout();
+} else {
+  return MobileLayout();
+}
